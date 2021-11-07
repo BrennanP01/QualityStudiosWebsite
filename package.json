@@ -1,16 +1,27 @@
 {
-  "name": "Quality_Studios",
+  "name": "quality_studios",
   "version": "1.0.0",
   "description": "Website for Quality Studios",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "devStart": "nodemon index.js"
   },
   "author": "Malik Tifah, Brennan Price, Jahi xxx, Simeon xxx",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.1",
+    "express-flash": "0.0.2",
     "express-handlebars": "^5.3.4",
-    "handlebars": "^4.7.7"
+    "express-session": "^1.17.2",
+    "handlebars": "^4.7.7",
+    "method-override": "^3.0.0",
+    "passport": "^0.5.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.14"
   }
 }
