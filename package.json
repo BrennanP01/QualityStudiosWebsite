@@ -1,12 +1,12 @@
 {
-  "name": "Barber_Shop",
+  "name": "Quality_Studios",
   "version": "1.0.0",
-  "description": "Website for Barber Shop",
+  "description": "Website for Quality Studios",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "author": "Malik Tifah Brennan xxx Jahi xxx, Simeon xxx",
+  "author": "Malik Tifah, Brennan Price, Jahi xxx, Simeon xxx",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
