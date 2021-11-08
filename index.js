@@ -66,6 +66,7 @@ app.get('/map',(req,res)=>{
     res.render('staff')
  })
 
+ // Forces the user to log in to schedule an appointment
  app.get('/schedule', checkAuthenticated, (req,res)=>{
    res.render('schedule')
 })
