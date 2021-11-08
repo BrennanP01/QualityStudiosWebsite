@@ -1,3 +1,5 @@
+
+
 if(process.env.NODE_ENV !== 'production'){
    require('dotenv').config()
 }
@@ -10,6 +12,7 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
+const fs = require('fs')
 
 const initializePassport = require('./passport-config')
 initializePassport(
@@ -45,6 +48,8 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 
+//Reads staff directory file
+
 /*This will load the homepage of the Website*/
 app.get('/',(req,res)=>{
    res.render('home')
@@ -62,8 +67,40 @@ app.get('/map',(req,res)=>{
     res.render('portfolio')
  })
 
- app.get('/staff',(req,res)=>{
-    res.render('staff')
+ app.get('/staff',(req,res)=>{ //Optimize this later
+   fs.readFile('staff.txt', function(err, data) {
+      if(err) throw err
+      let arr = data.toString().replace(/\r/g, '').split('\n')
+      const staff = {}
+      let new_person
+      let section
+      for(i in arr) {
+         let line = arr[i]
+         let parts =line.split('\t')
+         switch (parts[0]) {
+            case 'Name':
+               new_person =parts[1].split(' ')[0]
+               staff[new_person] = {Name: parts[1]}
+               //staff[new_person]["dip"] = "yeet"
+               break
+            case 'Booksy':
+            case 'Number':
+            case 'Specialty':
+            case 'Instagram':
+               staff[new_person][parts[0]] = parts[1]
+               break
+            case 'Hours':
+            case 'Pricing':
+               section = parts[0]
+               staff[new_person][section] = {}
+               break
+            case '-':
+               staff[new_person][section][parts[1]] = parts.slice(2)
+         }
+      }
+      console.log(staff)
+      res.render('staff', {staff})
+   }); 
  })
 
  // Forces the user to log in to schedule an appointment
