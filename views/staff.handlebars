@@ -13,6 +13,33 @@
             <a class="navLink" href="/schedule"><li style="float:left" class="navigationElement">Schedule</li></a>
             <a class="navLink" href="/about"><li style="float:left" class="navigationElement">About</li></a>
         </ul>
-    </div>
 
+    </div>
+    <div style="text-align: center;">
+        {{#each staff}}
+            <p> Name: {{this.Name}}<br>
+                Booksy: {{this.Booksy}}<br>
+                Number: {{this.Number}}<br>
+                Specialty: {{this.Specialty}}<br>
+                Instagram: {{this.Instagram}}<br>
+                Hours:<br>
+                {{#each this.Hours}}
+                    {{@key}}&emsp;
+                    {{#each this}}
+                        {{this}}&emsp;
+                    {{/each}}
+                    <br>
+                {{/each}}
+                Pricing:<br>
+                {{#each this.Pricing}}
+                    {{@key}}&emsp;
+                    {{#each this}}
+                        {{this}}&emsp;
+                    {{/each}}
+                    <br>
+                {{/each}}
+            </p>
+            <br>
+        {{/each}}
+    </div>
 </body>
