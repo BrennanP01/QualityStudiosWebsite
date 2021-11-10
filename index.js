@@ -81,7 +81,7 @@ function readFile() {
                   staff[new_person][section][parts[1]] = parts.slice(2)
             }
          }
-         //console.log(staff)
+         console.log(staff)
          resolve(staff)
       })
    })

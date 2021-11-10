@@ -19,7 +19,6 @@ Pricing
 	Kid’s Haircut	$25
 	Women’s Haircut	$25
 	Beard/Hair Lineup	$15
-
 Name	Erwin (EJ)
 Booksy	Quality Studios 
 Number	(815)-272-1024
@@ -38,7 +37,6 @@ Pricing
 	Men’s Haircut & Beard	$45
 	Kid’s Haircut	$30
 	Cleanup	$20
-
 Name	Leo
 Booksy	Quality Studios
 Number	N/A
@@ -57,7 +55,6 @@ Pricing
 	Men’s Haircut & Beard	$30
 	Kid’s Haircut	$20
 	Beard/Hair Lineup	$15
-
 Name	Simeon
 Booksy	SteezyFades
 Number	(779)-230-1353
@@ -77,7 +74,6 @@ Pricing
 	Kid’s Haircut	$25
 	Women’s Haircut	$25
 	Beard/Hair Lineup	$15
-
 Name	Nando
 Booksy	Barber Nando
 Number	(815)-630-0740
@@ -95,7 +91,6 @@ Pricing
 	Kid’s Haircut	$25
 	Beard/Hair Lineup	$15
 	Before/After Hours Services	$40
-
 Name	Chris
 Booksy	N/A
 Number	(815)-710-7412
@@ -114,7 +109,6 @@ Pricing
 	Kid’s Haircut	$25
 	Beard/Hair Lineup	$15
 	Full Service w/ Hot Towel Shave & Eyebrows	$80
-
 Name	Oscar (Cudii)
 Booksy	Cuddi Cuts
 Number	(773)-616-3150
@@ -132,7 +126,6 @@ Pricing
 	Men’s Haircut & Beard	$40
 	Kid’s Haircut	$20
 	Beard/Hair Lineup	$15
-
 Name	Yoshy
 Booksy	YoshyBlendz
 Number	(815)-714-1647
@@ -150,7 +143,6 @@ Pricing
 	Men’s Haircut & Beard	$35
 	Beard/Hair Lineup	$15
 	Eyebrows/Black Face Mask	$5
-
 Name	Kevin
 Booksy	KevoFadez
 Number	(815)-905-6213
@@ -167,7 +159,6 @@ Pricing
 	Men’s Haircut & Beard	$30
 	Kid’s Haircut	$20
 	Beard/Hair Lineup	$10
-
 Name	Adrian
 Booksy	Adrian Cutz
 Number	(331) 643-8979
