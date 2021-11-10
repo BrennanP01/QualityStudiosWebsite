@@ -14,6 +14,7 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 const fs = require('fs')
 
+
 const initializePassport = require('./passport-config')
 initializePassport(
    passport, 
@@ -49,7 +50,42 @@ app.use(passport.session())
 app.use(methodOverride('_method'))
 
 //Reads staff directory file
-
+function readFile() {
+   return new Promise((resolve, reject) => {
+      fs.readFile('staff.txt', 'utf8', function(err, data) {
+         if(err) return reject (err)
+         let arr = data.toString().replace(/\r/g, '').split('\n')
+         const staff = {}
+         let new_person
+         let section
+         for(i in arr) {
+            let line = arr[i]
+            let parts =line.split('\t')
+            switch (parts[0]) {
+               case 'Name':
+                  new_person =parts[1].split(' ')[0]
+                  staff[new_person] = {Name: parts[1]}
+                  break
+               case 'Booksy':
+               case 'Number':
+               case 'Specialty':
+               case 'Instagram':
+                  staff[new_person][parts[0]] = parts[1]
+                  break
+               case 'Hours':
+               case 'Pricing':
+                  section = parts[0]
+                  staff[new_person][section] = {}
+                  break
+               case '':
+                  staff[new_person][section][parts[1]] = parts.slice(2)
+            }
+         }
+         //console.log(staff)
+         resolve(staff)
+      })
+   })
+}
 /*This will load the homepage of the Website*/
 app.get('/',(req,res)=>{
    res.render('home')
@@ -67,40 +103,9 @@ app.get('/map',(req,res)=>{
     res.render('portfolio')
  })
 
- app.get('/staff',(req,res)=>{ //Optimize this later
-   fs.readFile('staff.txt', function(err, data) {
-      if(err) throw err
-      let arr = data.toString().replace(/\r/g, '').split('\n')
-      const staff = {}
-      let new_person
-      let section
-      for(i in arr) {
-         let line = arr[i]
-         let parts =line.split('\t')
-         switch (parts[0]) {
-            case 'Name':
-               new_person =parts[1].split(' ')[0]
-               staff[new_person] = {Name: parts[1]}
-               //staff[new_person]["dip"] = "yeet"
-               break
-            case 'Booksy':
-            case 'Number':
-            case 'Specialty':
-            case 'Instagram':
-               staff[new_person][parts[0]] = parts[1]
-               break
-            case 'Hours':
-            case 'Pricing':
-               section = parts[0]
-               staff[new_person][section] = {}
-               break
-            case '-':
-               staff[new_person][section][parts[1]] = parts.slice(2)
-         }
-      }
-      console.log(staff)
+ app.get('/staff', async (req,res)=>{
+      const staff = await readFile()
       res.render('staff', {staff})
-   }); 
  })
 
  // Forces the user to log in to schedule an appointment
@@ -125,7 +130,7 @@ app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
 app.get('/register', checkNotAuthenticated,(req,res)=>{
    res.render('register')
 })
-
+//--
 app.post('/register', checkNotAuthenticated, async (req,res)=>{
    try{
       const hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -141,7 +146,7 @@ app.post('/register', checkNotAuthenticated, async (req,res)=>{
    }
    console.log(users)
 })
-
+/
 app.delete('/logout', (req, res) => {
    req.logOut()
    res.redirect('/')
