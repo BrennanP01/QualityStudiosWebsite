@@ -1,5 +1,3 @@
-
-
 if(process.env.NODE_ENV !== 'production'){
    require('dotenv').config()
 }
@@ -52,36 +50,38 @@ app.use(methodOverride('_method'))
 //Reads staff directory file
 function readFile() {
    return new Promise((resolve, reject) => {
-      fs.readFile('staff.txt', 'utf8', function(err, data) {
+      fs.readFile('public/files/staff.txt', 'utf8', function(err, data) {
          if(err) return reject (err)
          let arr = data.toString().replace(/\r/g, '').split('\n')
          const staff = {}
-         let new_person
-         let section
+         let new_person, list
          for(i in arr) {
             let line = arr[i]
             let parts =line.split('\t')
-            switch (parts[0]) {
-               case 'Name':
-                  new_person =parts[1].split(' ')[0]
-                  staff[new_person] = {Name: parts[1]}
+            let section = parts[0].toLowerCase()
+            switch (section) {
+               case 'name':
+                  new_person = parts[1].split(' ')[0].toLowerCase()
+                  staff[new_person] = {name: parts[1]}
                   break
-               case 'Booksy':
-               case 'Number':
-               case 'Specialty':
-               case 'Instagram':
-                  staff[new_person][parts[0]] = parts[1]
+               case 'photo':
+               case 'booksy':
+               case 'link':
+               case 'number':
+               case 'specialty':
+               case 'instagram':
+                  staff[new_person][section] = parts[1]
                   break
-               case 'Hours':
-               case 'Pricing':
-                  section = parts[0]
-                  staff[new_person][section] = {}
+               case 'hours':
+               case 'pricing':
+                  list = section
+                  staff[new_person][list] = {}
                   break
                case '':
-                  staff[new_person][section][parts[1]] = parts.slice(2)
+                  staff[new_person][list][parts[1]] = parts.slice(2)
             }
          }
-         console.log(staff)
+         //console.log(staff)
          resolve(staff)
       })
    })
@@ -105,7 +105,10 @@ app.get('/map',(req,res)=>{
 
  app.get('/staff', async (req,res)=>{
       const staff = await readFile()
-      res.render('staff', {staff})
+      res.render('staff', {
+         style: "/css/staff.css",
+         staff
+      })
  })
 
  // Forces the user to log in to schedule an appointment
