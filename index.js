@@ -46,16 +46,14 @@ console.log("Attempting connection to database...")
 mongoose.connect(dbURL)
    .then((result)=> {
       console.log("Connected to database")
-      app.listen(port, ()=>console.log(
-         `Express started on http://localhost:${port}; ` +
-         `press Ctrl-C to terminate.`
-     ))
    })
    .catch((err) => console.log(err))
 
 app.engine('handlebars', expressHandlebars({
     defaultLayout: 'main'
 }))
+
+
 
 app.set('view engine', 'handlebars')
 // Gets the current directory, and adds the "public" file
@@ -202,3 +200,8 @@ function checkNotAuthenticated(req, res, next) {
       next()
    }
 }
+
+app.listen(port, ()=>console.log(
+   `Express started on http://localhost:${port}; ` +
+   `press Ctrl-C to terminate.`
+))
