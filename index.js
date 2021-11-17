@@ -4,41 +4,13 @@ if(process.env.NODE_ENV !== 'production'){
 
 // Used express to get the file to display
 const express = require('express')
-const bcrypt = require('bcrypt')
 const app = express()
-const passport = require('passport')
-const flash = require('express-flash')
-const session = require('express-session')
-const methodOverride = require('method-override')
 const fs = require('fs')
 const expressHandlebars = require('express-handlebars')
 const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
 // mongodb library
 const mongoose = require('mongoose')
-const User = require('./models/user')
-
-
-const initializePassport = require('./passport-config')
-initializePassport(
-   passport, 
-   email = async () => {
-      try{
-         return await User.find({email: "w@w"})
-      } catch {
-         console.log("err")
-         return null;
-      }
-   },
-   id = async () => {
-      try{
-         return await User.findById(id).result
-      }catch{
-         console.log("err")
-         return null;
-      }
-   }
-)
 
 const dbURL = 'mongodb+srv://qsUser:hum2B2XhbxAg98b@cluster0.rmx4o.mongodb.net/qualityStudios-db?retryWrites=true&w=majority'
 
@@ -61,15 +33,6 @@ app.set('view engine', 'handlebars')
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(flash())
-app.use(session({
-   secret: process.env.SESSION_SECRET,
-   resave: false,
-   saveUninitialized: false
-}))
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(methodOverride('_method'))
 
 //Reads staff directory file
 function readFile() {
@@ -136,7 +99,7 @@ app.get('/map',(req,res)=>{
  })
 
  // Forces the user to log in to schedule an appointment
- app.get('/schedule', checkAuthenticated, (req,res)=>{
+ app.get('/schedule', (req,res)=>{
    res.render('schedule')
 })
 
@@ -144,62 +107,20 @@ app.get('/map',(req,res)=>{
     res.render('about')
  })
 
- app.get('/login', checkNotAuthenticated,(req,res)=>{
+ app.get('/login',(req,res)=>{
    res.render('login')
 })
 
-app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-   successRedirect: '/',
-   failureRedirect: '/login',
-   failureFlash: true
-}))
+app.post('/login')
 
-app.get('/register', checkNotAuthenticated,(req,res)=>{
+app.get('/register', (req,res)=>{
    res.render('register')
 })
-//--
-app.post('/register', checkNotAuthenticated, async (req,res)=>{
-   try{
-      // add user to the database
-      const hashedPassword = await bcrypt.hash(req.body.password, 10)
-      const userEntry = new User({
-         firstName: req.body.firstName,
-         lastName: req.body.lastName,
-         email: req.body.email,
-         password: hashedPassword
-      })
-      userEntry.save()
-         .then((result)=>{
-            res.redirect('/login')
-         })
-         .catch((err)=>{
-            console.log(err)
-         })
-   }catch{
-      res.redirect('/register')
-   }
-})
-/
-app.delete('/logout', (req, res) => {
-   req.logOut()
-   res.redirect('/')
-})
+app.post('/register', async (req,res)=>{
+   console.log("registered")
+   res.redirect('/login')
 
-function checkAuthenticated(req, res, next) {
-   if(req.isAuthenticated()){
-      return next()
-   }else{
-      res.redirect('/login')
-   }
-}
-
-function checkNotAuthenticated(req, res, next) {
-   if(req.isAuthenticated()){
-      return res.redirect('/')
-   }else{
-      next()
-   }
-}
+})
 
 app.listen(port, ()=>console.log(
    `Express started on http://localhost:${port}; ` +
