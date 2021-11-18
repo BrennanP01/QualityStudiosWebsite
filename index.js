@@ -107,6 +107,7 @@ app.get('/map',(req,res)=>{
       const staff = await readFile()
       res.render('staff', {staff})
  })
+ 
 
  // Forces the user to log in to schedule an appointment
  app.get('/schedule', checkAuthenticated, (req,res)=>{
