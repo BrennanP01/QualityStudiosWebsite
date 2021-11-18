@@ -7,7 +7,7 @@ const express = require('express')
 const app = express()
 const fs = require('fs')
 const expressHandlebars = require('express-handlebars')
-const jQuery = require('jQuery')
+const jQuery = require('jquery')
 
 const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
