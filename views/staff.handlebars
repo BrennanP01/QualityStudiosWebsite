@@ -15,31 +15,33 @@
         </ul>
 
     </div>
-    <div style="text-align: center;">
+    {{! Objectives:
+    1. Add booksy links
+    2. Add Instagram links
+    3. Add staff css file
+    
+     }}
+    <staff-page>
         {{#each staff}}
-            <p> Name: {{this.Name}}<br>
-                Booksy: {{this.Booksy}}<br>
-                Number: {{this.Number}}<br>
-                Specialty: {{this.Specialty}}<br>
-                Instagram: {{this.Instagram}}<br>
-                Hours:<br>
-                {{#each this.Hours}}
-                    {{@key}}&emsp;
-                    {{#each this}}
-                        {{this}}&emsp;
-                    {{/each}}
+            <staff-box>
+                <staff-photo>
+                    <img src="/img/{{this.photo}}" alt="{{this.name}}" style="width: 90%; height: auto">
+                </staff-photo>
+                <staff-des>
+                    <h2>{{this.name}}</h2>
+                    <h4>{{this.specialty}}</h4>
+                    <hr style="height: 5px; width: 30px; margin-left: 0; background-color: darkgray">
+                    <i class="fa fa-at"></i>
+                    <a href="{{this.link}}" target="_blank" rel="noopener noreferrer">{{this.booksy}}</a>
                     <br>
-                {{/each}}
-                Pricing:<br>
-                {{#each this.Pricing}}
-                    {{@key}}&emsp;
-                    {{#each this}}
-                        {{this}}&emsp;
-                    {{/each}}
+                    <i class="fa fa-mobile"></i>
+                    <a href="tel:(815)-981-0927">{{this.number}}</a> {{! My own number for testing purposes}}
                     <br>
-                {{/each}}
-            </p>
-            <br>
+                    <i class="fa fa-instagram"></i>
+                    <a href="https://www.instagram.com/{{this.instagram}}" target="_blank" rel="noopener noreferrer">{{this.instagram}}</a>
+                    <br>
+                </staff-des>
+            </staff-box>
         {{/each}}
-    </div>
+    </staff-page>
 </body>

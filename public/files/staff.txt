@@ -1,5 +1,7 @@
 Name	Yonny
+Photo	default.png
 Booksy	YonnyTheBarber
+Link	https://booksy.com/en-us/548365_yonny-the-barber_barber-shop_19306_joliet
 Number	(815)-345-7615
 Specialty	Barber 
 Instagram	yonny_the_barber
@@ -20,7 +22,9 @@ Pricing
 	Women’s Haircut	$25
 	Beard/Hair Lineup	$15
 Name	Erwin (EJ)
-Booksy	Quality Studios 
+Photo	default.png
+Booksy	Quality Studios
+Link	https://booksy.com/en-us/397308_quality-studios_barber-shop_19306_joliet 
 Number	(815)-272-1024
 Specialty	Barber
 Instagram	erwin.official
@@ -38,7 +42,9 @@ Pricing
 	Kid’s Haircut	$30
 	Cleanup	$20
 Name	Leo
+Photo	default.png
 Booksy	Quality Studios
+Link	https://booksy.com/en-us/397308_quality-studios_barber-shop_19306_joliet
 Number	N/A
 Specialty	Barber 
 Instagram	leo_thebarber1
@@ -56,7 +62,9 @@ Pricing
 	Kid’s Haircut	$20
 	Beard/Hair Lineup	$15
 Name	Simeon
+Photo	default.png
 Booksy	SteezyFades
+Link	https://booksy.com/en-us/532168_steezyfades_barber-shop_19306_joliet
 Number	(779)-230-1353
 Specialty	Barber 
 Instagram	steezy.fades 
@@ -75,7 +83,9 @@ Pricing
 	Women’s Haircut	$25
 	Beard/Hair Lineup	$15
 Name	Nando
+Photo	default.png
 Booksy	Barber Nando
+Link	https://booksy.com/en-us/512685_barber-nando_barber-shop_19306_joliet
 Number	(815)-630-0740
 Specialty	Barber 
 Instagram	barberfirnxndu
@@ -92,7 +102,9 @@ Pricing
 	Beard/Hair Lineup	$15
 	Before/After Hours Services	$40
 Name	Chris
+Photo	default.png
 Booksy	N/A
+Link	N/A
 Number	(815)-710-7412
 Specialty	Barber 
 Instagram	c.the.barber
@@ -110,7 +122,9 @@ Pricing
 	Beard/Hair Lineup	$15
 	Full Service w/ Hot Towel Shave & Eyebrows	$80
 Name	Oscar (Cudii)
+Photo	default.png
 Booksy	Cuddi Cuts
+Link	https://booksy.com/en-us/578108_cuddi-cuts_barber-shop_19306_joliet
 Number	(773)-616-3150
 Specialty	Barber 
 Instagram	cuddicutz25
@@ -127,7 +141,9 @@ Pricing
 	Kid’s Haircut	$20
 	Beard/Hair Lineup	$15
 Name	Yoshy
+Photo	default.png
 Booksy	YoshyBlendz
+Link	https://booksy.com/en-us/606947_yoshyblendz_barber-shop_19306_joliet#ba_s=sh_1
 Number	(815)-714-1647
 Specialty	Barber 
 Instagram	Yonny_the_barber
@@ -144,7 +160,9 @@ Pricing
 	Beard/Hair Lineup	$15
 	Eyebrows/Black Face Mask	$5
 Name	Kevin
+Photo	default.png
 Booksy	KevoFadez
+Link	https://booksy.com/en-us/578613_kevofadez_barber-shop_19306_joliet
 Number	(815)-905-6213
 Specialty	Barber 
 Instagram	815kevofadez
@@ -160,7 +178,9 @@ Pricing
 	Kid’s Haircut	$20
 	Beard/Hair Lineup	$10
 Name	Adrian
+Photo	default.png
 Booksy	Adrian Cutz
+Link	https://booksy.com/en-us/444726_adrian-cutz1991_barber-shop_134786_dallas
 Number	(331) 643-8979
 Specialty	Barber 
 Instagram	N/A
