@@ -7,6 +7,8 @@ const express = require('express')
 const app = express()
 const fs = require('fs')
 const expressHandlebars = require('express-handlebars')
+const jQuery = require('jQuery')
+
 const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
 // mongodb library
@@ -73,6 +75,7 @@ function readFile() {
       })
    })
 }
+
 /*This will load the homepage of the Website*/
 app.get('/',(req,res)=>{
    res.render('home')
@@ -88,6 +91,9 @@ app.get('/map',(req,res)=>{
 
  app.get('/portfolio',(req,res)=>{
     res.render('portfolio')
+ })
+ app.get('/reviews' ,(req,res)=>{
+    res.render('reviews')
  })
 
  app.get('/staff', async (req,res)=>{
