@@ -1,5 +1,5 @@
 Name	Yonny
-Photo	default.png
+Photo	N/A
 Booksy	YonnyTheBarber
 Link	https://booksy.com/en-us/548365_yonny-the-barber_barber-shop_19306_joliet
 Number	(815)-345-7615
@@ -22,7 +22,7 @@ Pricing
 	Women’s Haircut	$25
 	Beard/Hair Lineup	$15
 Name	Erwin (EJ)
-Photo	default.png
+Photo	N/A
 Booksy	Quality Studios
 Link	https://booksy.com/en-us/397308_quality-studios_barber-shop_19306_joliet 
 Number	(815)-272-1024
@@ -42,7 +42,7 @@ Pricing
 	Kid’s Haircut	$30
 	Cleanup	$20
 Name	Leo
-Photo	default.png
+Photo	N/A
 Booksy	Quality Studios
 Link	https://booksy.com/en-us/397308_quality-studios_barber-shop_19306_joliet
 Number	N/A
@@ -62,7 +62,7 @@ Pricing
 	Kid’s Haircut	$20
 	Beard/Hair Lineup	$15
 Name	Simeon
-Photo	default.png
+Photo	N/A
 Booksy	SteezyFades
 Link	https://booksy.com/en-us/532168_steezyfades_barber-shop_19306_joliet
 Number	(779)-230-1353
@@ -83,7 +83,7 @@ Pricing
 	Women’s Haircut	$25
 	Beard/Hair Lineup	$15
 Name	Nando
-Photo	default.png
+Photo	N/A
 Booksy	Barber Nando
 Link	https://booksy.com/en-us/512685_barber-nando_barber-shop_19306_joliet
 Number	(815)-630-0740
@@ -102,7 +102,7 @@ Pricing
 	Beard/Hair Lineup	$15
 	Before/After Hours Services	$40
 Name	Chris
-Photo	default.png
+Photo	N/A
 Booksy	N/A
 Link	N/A
 Number	(815)-710-7412
@@ -122,7 +122,7 @@ Pricing
 	Beard/Hair Lineup	$15
 	Full Service w/ Hot Towel Shave & Eyebrows	$80
 Name	Oscar (Cudii)
-Photo	default.png
+Photo	N/A
 Booksy	Cuddi Cuts
 Link	https://booksy.com/en-us/578108_cuddi-cuts_barber-shop_19306_joliet
 Number	(773)-616-3150
@@ -141,7 +141,7 @@ Pricing
 	Kid’s Haircut	$20
 	Beard/Hair Lineup	$15
 Name	Yoshy
-Photo	default.png
+Photo	N/A
 Booksy	YoshyBlendz
 Link	https://booksy.com/en-us/606947_yoshyblendz_barber-shop_19306_joliet#ba_s=sh_1
 Number	(815)-714-1647
@@ -160,7 +160,7 @@ Pricing
 	Beard/Hair Lineup	$15
 	Eyebrows/Black Face Mask	$5
 Name	Kevin
-Photo	default.png
+Photo	N/A
 Booksy	KevoFadez
 Link	https://booksy.com/en-us/578613_kevofadez_barber-shop_19306_joliet
 Number	(815)-905-6213
@@ -178,7 +178,7 @@ Pricing
 	Kid’s Haircut	$20
 	Beard/Hair Lineup	$10
 Name	Adrian
-Photo	default.png
+Photo	N/A
 Booksy	Adrian Cutz
 Link	https://booksy.com/en-us/444726_adrian-cutz1991_barber-shop_134786_dallas
 Number	(331) 643-8979
@@ -197,3 +197,52 @@ Pricing
 	Men’s Haircut & Beard	$35
 	Kid’s Haircut	$25
 	Beard/Hair Lineup	$10
+Name	AB
+Specialty	Barber 
+Instagram	Yonny_the_barber
+Hours
+Name	Ricardo
+Specialty	Barber 
+Instagram	Yonny_the_barber
+Name	Carlos (Pollo)
+Number	(815) 616-9528
+Specialty	Barber 
+Instagram	N/A
+Hours
+	M	10:00 AM	3:00 PM
+	T	10:00 AM	3:00 PM
+	W	10:00 AM	3:00 PM
+	TH	10:00 AM	3:00 PM
+	F	10:00 AM	3:00 PM
+	SA	10:00 AM	3:00 PM
+	SU	10:00 AM	3:00 PM
+Pricing
+	Men’s Haircut	$25
+	Men’s Haircut & Beard	$30
+	Kid’s Haircut	$20
+	Beard/Hair Lineup	$10
+Name	Grisel (Gigi)
+Site	Her Site
+Link	https://app.acuityscheduling.com/schedule.php?owner=18633642 
+Number	(815) 579-8940
+Specialty	Lashes, Eyebrows & Nails
+Instagram	griselbeauty
+Name	Kay
+Booking	Through Instagram
+Specialty	Lash Technician
+Instagram	slayedbykayd
+Name	Julissa
+Site	Her Site
+Link	https://app.acuityscheduling.com/schedule.php?owner=20584263
+Specialty	Eyelashes & Nails 
+Instagram	glamxj
+Name	Lex
+Booking	Through Instagram
+Specialty	Lash Technician 
+Instagram	_luxelex
+Name	Nataly
+Site	Her site
+Link	https://square.site/book/16JE5K3QWNS70/skinn_g-joliet-il
+Number	(773) 396-6931
+Specialty	Esthetician 
+Instagram	skinn_g

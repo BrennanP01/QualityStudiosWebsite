@@ -121,7 +121,12 @@ function readFile() {
                case 'number':
                case 'specialty':
                case 'instagram':
-                  staff[new_person][section] = parts[1]
+               case 'site':
+                  if (parts[1] == 'N/A'){
+                     staff[new_person][section] = undefined
+                  }else{
+                     staff[new_person][section] = parts[1]
+                  }
                   break
                case 'hours':
                case 'pricing':
@@ -132,7 +137,7 @@ function readFile() {
                   staff[new_person][list][parts[1]] = parts.slice(2)
             }
          }
-         // console.log(staff)
+         //console.log(staff)
          resolve(staff)
       })
    })

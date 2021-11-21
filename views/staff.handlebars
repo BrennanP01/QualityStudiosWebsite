@@ -1,48 +1,61 @@
-<body>
-    <header>
-        <h2>Quality Studios Barbershop</h2>
-        <h3>Staff</h3>
-    </header>
-    <div style="text-align: center;">
-        <ul class="navigationBar">
-            <a class="navLink" href="/"><li style="float:left" class="navigationElement">Home</li></a>
-            <a class="navLink" href="/map"><li style="float:left" class="navigationElement">Map</li></a>
-            <a class="navLink" href="/social"><li style="float:left" class="navigationElement">Socials</li></a>
-            <a class="navLink" href="/portfolio"><li style="float:left" class="navigationElement">Portfolio</li></a>
-            <a class="navLink" href="/staff"><li style="float:left" class="navigationElement">Staff</li></a>
-            <a class="navLink" href="/schedule"><li style="float:left" class="navigationElement">Schedule</li></a>
-            <a class="navLink" href="/about"><li style="float:left" class="navigationElement">About</li></a>4
-            <a class="navLink" href="/reviews"><li style="float:left" class="navigationElement">Reviews</li></a>
-        </ul>
-
-    </div>
-    {{! Objectives:
-    1. Add booksy links
-    2. Add Instagram links
-    3. Add staff css file
-    
-     }}
-    <staff-page>
-        {{#each staff}}
-            <staff-box>
-                <staff-photo>
+<header>
+    <h2>Quality Studios Barbershop</h2>
+    <h3>Staff</h3>
+</header>
+<div style="text-align: center;">
+    <ul class="navigationBar">
+        <a class="navLink" href="/"><li style="float:left" class="navigationElement">Home</li></a>
+        <a class="navLink" href="/map"><li style="float:left" class="navigationElement">Map</li></a>
+        <a class="navLink" href="/social"><li style="float:left" class="navigationElement">Socials</li></a>
+        <a class="navLink" href="/portfolio"><li style="float:left" class="navigationElement">Portfolio</li></a>
+        <a class="navLink" href="/staff"><li style="float:left" class="navigationElement">Staff</li></a>
+        <a class="navLink" href="/schedule"><li style="float:left" class="navigationElement">Schedule</li></a>
+        <a class="navLink" href="/about"><li style="float:left" class="navigationElement">About</li></a>
+        <a class="navLink" href="/reviews"><li style="float:left" class="navigationElement">Reviews</li></a>
+    </ul>
+</div>
+{{! Objectives:
+1. Make schedule. Include today's date and show times for a 7 day period
+2. Make about us page
+3. Make appointment (new functionally)
+4. Use handler helper "if" for all N/A values
+5. Delete all N/A values in staff file
+6. Make the server-side function
+    }}
+<staff-page>
+    {{#each staff}}
+        <staff-box>
+            <staff-photo>
+                {{#if this.photo}}
                     <img src="/img/{{this.photo}}" alt="{{this.name}}" style="width: 90%; height: auto">
-                </staff-photo>
-                <staff-des>
-                    <h2>{{this.name}}</h2>
-                    <h4>{{this.specialty}}</h4>
-                    <hr style="height: 5px; width: 30px; margin-left: 0; background-color: darkgray">
+                {{else}}
+                    <img src="/img/default.png" alt="{{this.name}}" style="width: 90%; height: auto">
+                {{/if}}
+            </staff-photo>
+            <staff-des>
+                <h2>{{this.name}}</h2>
+                <h4>{{this.specialty}}</h4>
+                <hr style="height: 5px; width: 30px; margin-left: 0; background-color: darkgray">
+                {{#if this.booksy}}
                     <i class="fa fa-at"></i>
                     <a href="{{this.link}}" target="_blank" rel="noopener noreferrer">{{this.booksy}}</a>
                     <br>
-                    <i class="fa fa-mobile"></i>
-                    <a href="tel:(815)-981-0927">{{this.number}}</a> {{! My own number for testing purposes}}
+                {{else if this.site}}
+                    <i class="fa fa-at"></i>
+                    <a href="{{this.link}}" target="_blank" rel="noopener noreferrer">{{this.site}}</a>
                     <br>
+                {{/if}}
+                {{#if this.number}}
+                    <i class="fa fa-mobile"></i>
+                    <a href="tel:{{this.number}}">{{this.number}}</a>
+                    <br>
+                {{/if}}
+                {{#if this.instagram}}
                     <i class="fa fa-instagram"></i>
                     <a href="https://www.instagram.com/{{this.instagram}}" target="_blank" rel="noopener noreferrer">{{this.instagram}}</a>
                     <br>
-                </staff-des>
-            </staff-box>
-        {{/each}}
-    </staff-page>
-</body>
+                {{/if}}
+            </staff-des>
+        </staff-box>
+    {{/each}}
+</staff-page>
