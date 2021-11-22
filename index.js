@@ -197,7 +197,7 @@ hbs.handlebars.registerHelper("makeTable", function(staff) {
             dom += '<td style="background-color: silver">' + person.name + '</td>'
             let cell_color = 'black'
             times.forEach(hour => {
-               if (person.hours[week_abr[i]] && person.hours[week_abr[i]][0]) { //If person has week day and if person day doesn't equal N/A
+               if (person.hours[week_abr[i]] && person.hours[week_abr[i]][0]) { //If person has week day and if person day doesn't equal N/A (Might make a fileWriter next sprint)
                   if (hour == person.hours[week_abr[i]][0]) {
                   cell_color = 'white'
                   } else if (hour == person.hours[week_abr[i]][1]) {
