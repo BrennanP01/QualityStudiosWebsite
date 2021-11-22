@@ -45,7 +45,6 @@ const User = mongoose.model("User", new mongoose.Schema(
 
 passport.use(
    new LocalStrategy({usernameField: 'email'}, (email, attemptPassword, done) => {
-      console.log("Finding User")
       User.findOne({email: email})
          .then(user => {
             if(!user){
@@ -68,7 +67,13 @@ passport.use(
 }))
 passport.serializeUser((user,done) => done(null, user.id))
 passport.deserializeUser((id,done) => {
-   return done(null, User.findById(id))
+   User.findById(id, function(err, user){
+      done(null, {
+         firstName: user.firstName,
+         lastName: user.lastName,
+         email: user.email
+      })
+   })
 })
 
 console.log("Attempting connection to database...")
@@ -97,6 +102,8 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
+
+
 
 //Reads staff directory file
 function readFile() {
@@ -145,28 +152,31 @@ function readFile() {
 
 /*This will load the homepage of the Website*/
 app.get('/',(req,res)=>{
-   res.render('home')
+   // console.log(req)
+   // console.log(res)
+   res.render('home', {user: req.user})
 })
 
 app.get('/map',(req,res)=>{
-    res.render('map')
+    res.render('map', {user: req.user})
  })
 
  app.get('/social',(req,res)=>{
-    res.render('social')
+    res.render('social', {user: req.user})
  })
 
  app.get('/portfolio',(req,res)=>{
-    res.render('portfolio')
+    res.render('portfolio', {user: req.user})
  })
  app.get('/reviews' ,(req,res)=>{
-    res.render('reviews')
+    res.render('reviews', {user: req.user})
  })
 
  app.get('/staff', async (req,res)=>{
       const staff = await readFile()
       res.render('staff', {
          style: "/css/staff.css",
+         user: req.user,
          staff
       })
  })
@@ -174,11 +184,11 @@ app.get('/map',(req,res)=>{
 
   // Forces the user to log in to schedule an appointment
   app.get('/schedule', checkAuthenticated, (req,res)=>{
-   res.render('schedule')
+   res.render('schedule', {user: req.user})
 })
 
  app.get('/about',(req,res)=>{
-    res.render('about')
+    res.render('about', {user: req.user})
  })
 
  app.get('/login', checkNotAuthenticated,(req,res)=>{
@@ -243,7 +253,6 @@ function checkNotAuthenticated(req, res, next) {
       next()
    }
 }
-
 
 app.listen(port, ()=>console.log(
    `Express started on http://localhost:${port}; ` +

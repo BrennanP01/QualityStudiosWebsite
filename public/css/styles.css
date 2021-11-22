@@ -14,6 +14,22 @@ header {
     padding: 0;
 }
 
+.navigationButton {
+    display:block;
+    border:none;
+    color:white;
+    background-color: #888;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition-duration: 0ms;
+}
+
+.navigationButton:hover{
+background-color: #111;
+
+}
+
 .navLink:link {
     color: white;
     text-decoration: none;
