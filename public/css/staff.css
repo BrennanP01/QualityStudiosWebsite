@@ -24,7 +24,7 @@ a:link, a:visited {
 }
 
 staff-page{
-    display: block;
+    display: inline-block;
     text-align: center;
 }
 

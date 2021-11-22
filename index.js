@@ -247,7 +247,7 @@ app.get('/map',(req,res)=>{
  
 
   // Forces the user to log in to schedule an appointment
-  app.get('/schedule', checkAuthenticated, async (req,res)=>{
+  app.get('/schedule', async (req,res)=>{
       const staff = await readFile()
       res.render('schedule', {
          style: '/css/schedule.css',
