@@ -183,7 +183,7 @@ app.get('/map',(req,res)=>{
  
 
   // Forces the user to log in to schedule an appointment
-  app.get('/schedule', checkAuthenticated, (req,res)=>{
+  app.get('/schedule', (req,res)=>{
    res.render('schedule', {user: req.user})
 })
 
@@ -192,7 +192,7 @@ app.get('/map',(req,res)=>{
  })
 
  app.get('/login', checkNotAuthenticated,(req,res)=>{
-   res.render('login')
+   res.render('login', {style: "/css/login.css"})
 })
 
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
@@ -202,7 +202,7 @@ app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
 }))
 
 app.get('/register', checkNotAuthenticated,(req,res)=>{
-   res.render('register')
+   res.render('register', {style: "/css/login.css"})
 })
 
 app.post('/register', checkNotAuthenticated, (req,res)=>{
@@ -237,14 +237,6 @@ app.delete('/logout', (req, res) => {
    req.logOut()
    res.redirect('/')
 })
-
-function checkAuthenticated(req, res, next) {
-   if(req.isAuthenticated()){
-      return next()
-   }else{
-      res.redirect('/login')
-   }
-}
 
 function checkNotAuthenticated(req, res, next) {
    if(req.isAuthenticated()){

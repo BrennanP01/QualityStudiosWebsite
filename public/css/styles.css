@@ -7,6 +7,14 @@ header {
     text-align: center
 }
 
+a, button {
+    font: 12px Arial;
+}
+
+h2, h3 {
+    font-family: Arial;
+}
+
 .navigationBar {
     display: inline-block;
     list-style-type: none;
@@ -22,6 +30,7 @@ header {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    cursor: pointer;
     transition-duration: 0ms;
 }
 

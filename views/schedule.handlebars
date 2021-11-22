@@ -3,6 +3,8 @@
     <h3>Schedule</h3>
 </header>
 {{> navBar}}
-<form action="/logout?_method=DELETE" method="POST">
-    <button type="submit">Log Out</button>
-</form>
+{{#if user}}
+    <p>Show schedule with option to register</p>
+{{else}}
+    <p>Show schedule without option to register</p>
+{{/if}}
