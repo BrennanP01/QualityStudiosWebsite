@@ -26,17 +26,10 @@ a:link, a:visited {
 staff-page{
     display: block;
     text-align: center;
-    /* 
-    margin-right: calc(var(--col-1) / 4);
-    margin-left: calc(var(--col-1) / 4);
-    */
 }
+
 staff-box {
     display: inline-block; /*Custom elements need this to work properly*/
-    /* 
-    margin-right: calc(var(--col-1) / 4);
-    margin-left: calc(var(--col-1) / 4);
-    */
     border: 2px solid rgb(230, 230, 230);
     margin: 10px;
     min-width: var(--col-3);
@@ -53,9 +46,6 @@ staff-photo {
     width: 20%; 
     height: 500px; /*fit window wasn't working*/
     float: left; 
-    /* 
-    background: red;
-    */ 
 }
 
 staff-des { 

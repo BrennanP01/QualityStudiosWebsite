@@ -18,6 +18,7 @@ const LocalStrategy = require('passport-local').Strategy
 
 // mongodb library
 const mongoose = require('mongoose')
+const { time } = require('console')
 
 
 const dbURL = 'mongodb+srv://qsUser:hum2B2XhbxAg98b@cluster0.rmx4o.mongodb.net/qualityStudios-db?retryWrites=true&w=majority'
@@ -143,6 +144,69 @@ function readFile() {
    })
 }
 
+//Custom helpers (Will try to put them in a seperate file)
+var hbs = expressHandlebars.create({});
+
+hbs.handlebars.registerHelper("makeTable", function(staff) {
+   //Declare variables
+   let week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+   let week_abr = ['M', 'T', 'W', 'T', 'F', 'SA', 'SU']
+   let start = {hour: 9, mins: '00', period: 'AM'}
+   let end = {hour: 8, mins: '30', period: 'PM'}
+   let step = {...start};
+   let dom = ''
+   //Make times
+   times = []
+   while (step.hour != end.hour || step.mins != end.mins || step.period != end.period) {
+      times.push(step.hour + ':' + step.mins + ' ' + step.period)
+      if (step.mins == '00') {
+         step.mins = '30'
+      } else if (step.mins = '30') {
+         step.hour++
+         step.mins = '00'
+         if (step.hour == 12) {
+            step.period = 'PM'
+         }
+         if (step.hour == 13) {
+            step.hour = 1
+         }
+      }
+   }
+   //console.log(times)
+   //Make table
+   week.forEach((day, i) => {
+      dom += '<table style="width: 100%">'
+      dom += '<tr>'
+      dom += '<th style="background-color: gold; color: white">' + day + '</th>'
+      times.forEach((hour, j) => {
+         if (j % 2 == 0) {
+            dom += '<th colspan="2" style="background-color: silver">' + hour + '</th>'
+         }
+       })
+       dom += '</tr>'
+       Object.values(this).forEach(person => {
+         if (person.hours) {
+            dom += '<tr>'
+            dom += '<td style="background-color: silver">' + person.name + '</td>'
+            let cell_color = 'black'
+            times.forEach(hour => {
+               if (person.hours[week_abr[i]] && person.hours[week_abr[i]][0]) { //If person has week day and if person day doesn't equal N/A
+                  if (hour == person.hours[week_abr[i]][0]) {
+                  cell_color = 'white'
+                  } else if (hour == person.hours[week_abr[i]][1]) {
+                  cell_color = 'black'
+                  }
+               }      
+               dom += '<td style="background-color: ' + cell_color + '"></td>'
+            })
+         }     
+         dom += '</tr>'
+       })
+       dom += '</table>'
+   })
+   return dom
+});
+
 /*This will load the homepage of the Website*/
 app.get('/',(req,res)=>{
    res.render('home')
@@ -166,15 +230,21 @@ app.get('/map',(req,res)=>{
  app.get('/staff', async (req,res)=>{
       const staff = await readFile()
       res.render('staff', {
-         style: "/css/staff.css",
+         style: '/css/staff.css',
          staff
       })
  })
  
 
   // Forces the user to log in to schedule an appointment
-  app.get('/schedule', checkAuthenticated, (req,res)=>{
-   res.render('schedule')
+  app.get('/schedule', checkAuthenticated, async (req,res)=>{
+      const staff = await readFile()
+      res.render('schedule', {
+         style: '/css/schedule.css',
+         script:'/scripts/schedule.js',
+         staff,
+         
+      })
 })
 
  app.get('/about',(req,res)=>{
