@@ -3,8 +3,9 @@
         <h2>Quality Studios Barbershop</h2>
         <h3>Home</h3>
     </header>
-    <div style="text-align: center;">
-        <ul class="navigationBar">
+    <div class= "header1" style="text-align: center;" id = "header"> </div>
+    <div style="text-align: center; height:auto; max-height:fit-content" id= "navigationBar">
+        <ul class="navigationBar" >
             <a class="navLink" href="/"><li style="float:left" class="navigationElement">Home</li></a>
             <a class="navLink" href="/map"><li style="float:left" class="navigationElement">Map</li></a>
             <a class="navLink" href="/social"><li style="float:left" class="navigationElement">Socials</li></a>
@@ -17,5 +18,15 @@
         <br>
         <img src="/img/shop_google.png" width= 50%  height= auto alt="shop">
     </div>
-    
+    <div style= "background-color: black;" id="Footer">
+        <p>Test</p>
+        <p>Other test</p>
+    </div>
+   <script>
+       const bg = document.getElementById('header');
+       window.addEventListener('scroll',function(){
+           bg.style.backgroundSize = 90- +window.pageYOffset/12+ '%'
+           bg.style.opacity= 1 -+window.pageYOffset/700+ ''
+       })
+   </script>
 </body>

@@ -2,7 +2,7 @@
   <link rel="stylesheet" href="css\jquery-google-reviews.css"/>
     <title>Quality Studios Reviews</title>
 
-  <!-- JQUERY IS REQUIRED -->
+  <!-- JQUERY IS REQUIRED (NPM install JQuery)-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <!-- DO NOT FORGET TO SET YOUR OWN API KEY!  -->
@@ -132,7 +132,7 @@ Thank you guys!
       var time = newDate.getDate() + ". " + months[newDate.getMonth()] + " " + newDate.getFullYear();
       return time;
     };
-
+    
     var filterReviewsByMinRating = function(reviews) {
       if (reviews === void 0) {
         return [];
