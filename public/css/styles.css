@@ -7,11 +7,36 @@ header {
     text-align: center
 }
 
+a, button {
+    font: 12px Arial;
+}
+
+h2, h3 {
+    font-family: Arial;
+}
+
 .navigationBar {
     display: inline-block;
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+.navigationButton {
+    display:block;
+    border:none;
+    color:white;
+    background-color: #888;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition-duration: 0ms;
+}
+
+.navigationButton:hover{
+background-color: #111;
+
 }
 
 .navLink:link {

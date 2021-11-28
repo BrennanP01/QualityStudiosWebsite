@@ -1,22 +1,13 @@
-<body>
-    <header>
-        <h2>Quality Studios Barbershop</h2>
-        <h3>Schedule</h3>
-    </header>
-    <div style="text-align: center;">
-        <ul class="navigationBar">
-            <a class="navLink" href="/"><li style="float:left" class="navigationElement">Home</li></a>
-            <a class="navLink" href="/map"><li style="float:left" class="navigationElement">Map</li></a>
-            <a class="navLink" href="/social"><li style="float:left" class="navigationElement">Socials</li></a>
-            <a class="navLink" href="/portfolio"><li style="float:left" class="navigationElement">Portfolio</li></a>
-            <a class="navLink" href="/staff"><li style="float:left" class="navigationElement">Staff</li></a>
-            <a class="navLink" href="/schedule"><li style="float:left" class="navigationElement">Schedule</li></a>
-            <a class="navLink" href="/about"><li style="float:left" class="navigationElement">About</li></a>
-            <a class="navLink" href="/reviews"><li style="float:left" class="navigationElement">Reviews</li></a>
-        </ul>
-    </div>
-    <form action="/logout?_method=DELETE" method="POST">
-        <button type="submit">Log Out</button>
-    </form>
-
-</body>
+<header>
+    <h2>Quality Studios Barbershop</h2>
+    <h3>Schedule</h3>
+</header>
+{{> navBar}}
+{{#if user}}
+    <p>Show schedule with option to register</p>
+{{else}}
+    <p>Show schedule without option to register</p>
+{{/if}}
+{{#with staff}}
+    {{{makeTable}}}
+{{/with}}
