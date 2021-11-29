@@ -1,11 +1,9 @@
 <body>
     <header>
-        <h2>Quality Studios Barbershop</h2>
-        <h3>Home</h3>
-    </header>
     <div style=" position: relative; width: 100%; height: 35vh; background: url(/img/qs_logo.png);
-    background-size: 90%;background-repeat: no-repeat ;background-position: center; background-attachment: fixed;
-    padding-bottom: 250px;" id = "header"> </div>
+    background-size: 100%;background-repeat: no-repeat ;background-position: center; background-attachment: fixed;
+    padding-bottom: 280px;" id = "header"> </div>
+    </header>
     <div style="text-align: center; height:auto; max-height:fit-content" id= "navigationBar">
         <ul class="navigationBar" >
             <a class="navLink" href="/"><li style="float:left" class="navigationElement">Home</li></a>
@@ -28,7 +26,7 @@
    <script>
        const bg = document.getElementById('header');
        window.addEventListener('scroll',function(){
-           bg.style.backgroundSize = 90- +window.pageYOffset/12+ '%'
+           bg.style.backgroundSize = 100- +window.pageYOffset/12+ '%'
            bg.style.opacity= 1 -+window.pageYOffset/700+ ''
        })
    </script>
