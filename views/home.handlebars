@@ -27,23 +27,13 @@
         var header = document.getElementsByClassName("navLink");
         const bar = document.getElementById('navBar')
         window.addEventListener('scroll',function(){
-            if(bg.style.display!="none"){
             bg.style.backgroundSize = 100- +window.pageYOffset/12+ '%'
             bg.style.opacity= 1 -+window.pageYOffset/700+ ''
-            }
             bar.style.marginTop =  bar.style.marginTop- (1000 +'px')
          
            for(i =0; i<header.length; i++){
                header[i].style.fontSize = 15+window.pageYOffset/20+'px';
            } 
-            
-           if(bg.style.opacity<=0.2){
-               bg.style.display= "none"
-           }
-           else{
-               bg.style.display= "block"
-           }
-          
        })
    </script>
 </body>
