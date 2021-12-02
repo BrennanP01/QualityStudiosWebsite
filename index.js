@@ -18,8 +18,6 @@ const LocalStrategy = require('passport-local').Strategy
 
 // mongodb library
 const mongoose = require('mongoose')
-const { time } = require('console')
-
 
 const dbURL = 'mongodb+srv://qsUser:hum2B2XhbxAg98b@cluster0.rmx4o.mongodb.net/qualityStudios-db?retryWrites=true&w=majority'
 
@@ -40,6 +38,39 @@ const User = mongoose.model("User", new mongoose.Schema(
       password: {
           type: String,
           required: true
+      }
+  }
+))
+
+const Staff = mongoose.model("Staff", new mongoose.Schema(
+   {
+      name: {type: String, required:true},
+      booksy: {type: String},
+      site: {type: String},
+      link: {type: String},
+      number: {type: String},
+      speciality: {type: String},
+      instagram: {type: String},
+      hours: {
+         M: [String],
+         T: [String],
+         W: [String],
+         TH: [String],
+         F: [String],
+         SA: [String],
+         SU: [String],
+      },
+      pricing: {
+         "Men's Haircut": [String],
+         "Men's Haircut & Beard": [String],
+         "Kid's Haircut": [String],
+         "Beard/Hair Lineup": [String],
+         "Eyebrows/Black Face Mask": [String],
+         "Full Service w/ Hot Towel Shave & Eyebrows": [String],
+         "Before/After Hours Services": [String],
+         "Women’s Haircut": [String],
+         "Men’s Haircut & Eyebrows": [String],
+         "Men’s Haircut, Eyebrows & Beard": [String],
       }
   }
 ))
@@ -66,6 +97,7 @@ passport.use(
             }
          })
 }))
+
 passport.serializeUser((user,done) => done(null, user.id))
 passport.deserializeUser((id,done) => {
    User.findById(id, function(err, user){
@@ -103,53 +135,6 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
-
-
-
-//Reads staff directory file
-function readFile() {
-   return new Promise((resolve, reject) => {
-      fs.readFile('public/files/staff.txt', 'utf8', function(err, data) {
-         if(err) return reject (err)
-         let arr = data.toString().replace(/\r/g, '').split('\n')
-         const staff = {}
-         let new_person, list
-         for(i in arr) {
-            let line = arr[i]
-            let parts =line.split('\t')
-            let section = parts[0].toLowerCase()
-            switch (section) {
-               case 'name':
-                  new_person = parts[1].split(' ')[0].toLowerCase()
-                  staff[new_person] = {name: parts[1]}
-                  break
-               case 'photo':
-               case 'booksy':
-               case 'link':
-               case 'number':
-               case 'specialty':
-               case 'instagram':
-               case 'site':
-                  if (parts[1] == 'N/A'){
-                     staff[new_person][section] = undefined
-                  }else{
-                     staff[new_person][section] = parts[1]
-                  }
-                  break
-               case 'hours':
-               case 'pricing':
-                  list = section
-                  staff[new_person][list] = {}
-                  break
-               case '':
-                  staff[new_person][list][parts[1]] = parts.slice(2)
-            }
-         }
-         //console.log(staff)
-         resolve(staff)
-      })
-   })
-}
 
 //Custom helpers (Will try to put them in a seperate file)
 var hbs = expressHandlebars.create({});
@@ -216,8 +201,6 @@ hbs.handlebars.registerHelper("makeTable", function(staff) {
 
 /*This will load the homepage of the Website*/
 app.get('/',(req,res)=>{
-   // console.log(req)
-   // console.log(res)
    res.render('home', {user: req.user})
 })
 
@@ -237,24 +220,23 @@ app.get('/map',(req,res)=>{
  })
 
  app.get('/staff', async (req,res)=>{
-      const staff = await readFile()
-      res.render('staff', {
-         style: '/css/staff.css',
-         user: req.user,
-         staff
-      })
+   const staff = await Staff.find({}).lean()
+   res.render('staff', {
+      style: '/css/staff.css',
+      user: req.user,
+      staff
+   })
  })
- 
 
   // Forces the user to log in to schedule an appointment
   app.get('/schedule', async (req,res)=>{
-      const staff = await readFile()
-      res.render('schedule', {
-         style: '/css/schedule.css',
-         script:'/scripts/schedule.js',
-         staff,
-         user: req.user
-      })
+   const staff = await Staff.find({}).lean()
+   res.render('schedule', {
+      style: '/css/schedule.css',
+      script:'/scripts/schedule.js',
+      staff,
+      user: req.user
+   })
    })
  app.get('/about',(req,res)=>{
     res.render('about', {user: req.user})
