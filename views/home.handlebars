@@ -1,9 +1,11 @@
 <body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <header>
         <div style="background-color: black;">
-        <div style=" position: top; width: 100%; height: 35vh; background: url(/img/qs_logo.png);
-        background-size: 100%;background-repeat: no-repeat ;background-position: center; background-attachment: fixed;
-        padding-bottom: 350px; " id = "header"> </div>
+            <div style=" position: top; width: 100%; height: 35vh; background: url(/img/qs_logo.png);
+            background-size: 100%;background-repeat: no-repeat ;background-position: center; background-attachment: fixed;
+            padding-bottom: 350px; " id = "header"> 
+            </div>
         </div>
     </header>
     <div style="text-align: center" id= "navBar">
@@ -19,12 +21,34 @@
         </ul>
         <br>
     </div>
+    
     <div style="text-align: center;">
         <img src="/img/shop_google.png" width= "50%"  height= "auto" alt="shop">
     </div>
+    <div>
+    <p>Insert flavor text about shop here</p>
+    <div id = "slideshow">
+            <div>
+                <img src="/img/1.jfif" height="100%" width="100%">
+                </div>
+            <div>
+                <img src="/img/2.jfif"  height="100%" width="100%" >
+            </div>
+            <div>
+                <img src="/img/3.jfif"  height="100%" width="100%">
+            </div>
+            <div>
+                <img src="/img/4.jfif"  height="100%" width="100%" >
+            </div>
+            <div>
+                <img src="/img/5.jfif"  height="100%" width="100%">
+            </div>
+            
+            </div>
+        </div>
     <!--To DO: Add a "Book an appointment with one of our staff" button, and see if we can add portfolio onto the main page-->
+    <p>Insert booking text here</p>
     <div class = "Footer" style=  "text-align:left" id="Footer">
-         
           <p class="FooterText"> 822 Plainfield Rd,<br> Joliet, IL 60435</p>
           <p class="FooterText">Contact Us: <a href = "tel:8155798940">(815) 579 8940</a></p>
           <p class = "FooterText"> Follow us<br> <a href = "https://www.instagram.com/quality.studios/?hl=en">Instagram</a><br><a href = "https://www.facebook.com/quality.studioss/">Facebook</a> </p>
@@ -36,12 +60,30 @@
         const bg = document.getElementById('header');
         var header = document.getElementsByClassName("navLink")
         const bar = document.getElementById('navBar')
+       
         //TODO: add another even listener "On load" That will properly display the tab depending on screen orientation
         window.addEventListener('scroll',function(){
-            bg.style.backgroundSize = 100- +window.pageYOffset/12+ '%' //Shrinks the barbershop logo as you scroll down
-            bg.style.opacity= 1 -+window.pageYOffset/700+ '' // Decreases the opacity of the barbershop logo as you scroll down
+           resizeHeaderImage();
             // Makes it so when you scroll past a certain point, the nav bar will stay in the same place and will not grow
-            if(window.pageYOffset>610){
+            resizeNavBar();
+           
+       })
+       window.addEventListener('load',function(){
+           resizeNavBar();
+           $("#slideshow > div:gt(0)").hide();
+
+            setInterval(function() { 
+            $('#slideshow > div:first')
+            .fadeOut(1000)
+            .next()
+            .fadeIn(1000)
+            .end()
+            .appendTo('#slideshow');
+            }, 3000);
+
+       })
+        function resizeNavBar(){
+             if(window.pageYOffset>610){
                bar.style.position = "fixed"
                bar.style.top = "0%";
                bar.style.left = "5.5%";
@@ -56,6 +98,10 @@
                 }
         
            } 
-       })
+        }
+        function resizeHeaderImage(){
+            bg.style.backgroundSize = 100- +window.pageYOffset/12+ '%' //Shrinks the barbershop logo as you scroll down
+            bg.style.opacity= 1 -+window.pageYOffset/700+ '' // Decreases the opacity of the barbershop logo as you scroll down
+        }
    </script>
 </body>
