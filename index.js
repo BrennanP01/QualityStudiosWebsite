@@ -199,6 +199,10 @@ hbs.handlebars.registerHelper("makeTable", function(staff) {
    return dom
 });
 
+hbs.handlebars.registerHelper("ifEqual", function(a, b, options) {
+   if(a==b){return options.fn(this)}
+})
+
 /*This will load the homepage of the Website*/
 app.get('/',(req,res)=>{
    res.render('home', {user: req.user})
@@ -278,6 +282,45 @@ app.post('/register', checkNotAuthenticated, (req,res)=>{
          .catch((err)=>{
             console.log(err)
          })
+   }catch(e){
+      console.log(e)
+      res.redirect('/register')
+   }
+})
+
+app.get('/staffRegister',(req,res)=>{
+   res.render('staffRegister', {style: "/css/login.css"})
+})
+
+app.post('/staffRegister', (req,res)=>{
+   try{
+      // add staff to the database
+      var name = String(req.body.name)      
+      var booksy = String(req.body.booksy)      
+      var site = String(req.body.site)         
+      var link = String(req.body.link)      
+      var number = String(req.body.number)      
+      var speciality = String(req.body.speciality)      
+      var instagram = String(req.body.instagram)      
+
+      const staffEntry = new Staff({
+         name: name,
+         booksy: booksy,
+         site: site,
+         link: link,
+         number: number,
+         speciality: speciality,
+         instagram: instagram
+      })
+
+      staffEntry.save()
+         .then((result) => {
+            res.redirect('/staff')
+         })
+         .catch((err) => {
+            console.log(err)
+         })
+
    }catch(e){
       console.log(e)
       res.redirect('/register')
