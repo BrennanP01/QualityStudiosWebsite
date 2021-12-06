@@ -10,11 +10,11 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
-const fs = require('fs')
 const expressHandlebars = require('express-handlebars')
 const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
 const LocalStrategy = require('passport-local').Strategy
+const nodemailer = require('nodemailer');
 
 // mongodb library
 const mongoose = require('mongoose')
@@ -136,6 +136,30 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 
+//Email
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'qualitystudiosbarbershop@gmail.com',//Tethered to my account(Jahi)
+    pass: 'opensesame1999'
+  }
+});
+
+const mailer = (recipient) => {
+   transporter.sendMail({
+      from: 'qualitystudiosbarbershop@gmail.com',
+      to: recipient,
+      subject: 'Welcome to Quality Studios!',
+      text: 'Thank you for registering to Quailty Studios.'
+      }
+      , function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+}
 //Custom helpers (Will try to put them in a seperate file)
 var hbs = expressHandlebars.create({});
 
@@ -199,6 +223,7 @@ hbs.handlebars.registerHelper("makeTable", function(staff) {
    return dom
 });
 
+
 hbs.handlebars.registerHelper("ifEqual", function(a, b, options) {
    if(a==b){return options.fn(this)}
 })
@@ -242,6 +267,9 @@ app.get('/map',(req,res)=>{
       user: req.user
    })
    })
+   //app.post('/schedule', (req,res)=>{
+   //   if (req.body.firstName)
+   //})
  app.get('/about',(req,res)=>{
     res.render('about', {user: req.user})
  })
@@ -257,7 +285,10 @@ app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
 }))
 
 app.get('/register', checkNotAuthenticated,(req,res)=>{
-   res.render('register', {style: "/css/login.css"})
+   res.render('register', {
+      style: "/css/login.css",
+      script:'/scripts/register.js',
+   })
 })
 
 app.post('/register', checkNotAuthenticated, (req,res)=>{
@@ -268,7 +299,7 @@ app.post('/register', checkNotAuthenticated, (req,res)=>{
       var fName = String(req.body.firstName)
       var lName = String(req.body.lastName)
       var emai = String(req.body.email)
-
+      mailer(emai)
       const userEntry = new User({
          firstName: fName,
          lastName: lName,
