@@ -252,6 +252,7 @@ app.get('/map',(req,res)=>{
    const staff = await Staff.find({}).lean()
    res.render('staff', {
       style: '/css/staff.css',
+      script:'/scripts/staff.js',
       user: req.user,
       staff
    })
@@ -267,9 +268,6 @@ app.get('/map',(req,res)=>{
       user: req.user
    })
    })
-   //app.post('/schedule', (req,res)=>{
-   //   if (req.body.firstName)
-   //})
  app.get('/about',(req,res)=>{
     res.render('about', {user: req.user})
  })

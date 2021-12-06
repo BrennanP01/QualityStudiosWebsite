@@ -9,9 +9,13 @@
 3. Make appointment (new functionally)
 4. Make the server-side function
     }}
-<staff-page>
+ <form onsubmit="return updateResults()">
+      <input type="text" placeholder="Search.." id="search">
+      <button type="submit">Submit</button>
+    </form>
+<staff-page id="staffpage">
     {{#each staff}}
-        <staff-box>
+        <staff-box id="{{this.name}}">
             <staff-photo>
                 {{#if this.photo}}
                     <img src="/img/{{this.photo}}" alt="{{this.name}}" style="width: 90%; height: auto">
