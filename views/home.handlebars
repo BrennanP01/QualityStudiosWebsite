@@ -39,6 +39,7 @@
         <div class = "FlavorText">
             <p>Insert slideshow about nailwork</p>
         </div>
+        <p>Quality cuts, Quality Makeup, Quality Studios</p>
     <!--To DO: Add a "Book an appointment with one of our staff" button, and see if we can add portfolio onto the main page-->
     <p class="FlavorText" style="text-align: center;">Book an appointment with one of our staff now.</p>
     <a href="/staff" style="text-align: center;"><p class="FlavorText">Book now</p></a>
@@ -58,7 +59,6 @@
         const bg = document.getElementById('header');
         var header = document.getElementsByClassName("navLink")
         const bar = document.getElementById('navBar')
-        var navBarSize = 15+window.pageYOffset/20+'px'
        
         //TODO: add another even listener "On load" That will properly display the tab depending on screen orientation
         window.addEventListener('scroll',function(){
@@ -68,6 +68,7 @@
            
        })
        window.addEventListener('load',function(){
+            resizeNavBar();
             $("#slideshow > div:gt(0)").hide();
 
             setInterval(function() { 

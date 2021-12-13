@@ -126,3 +126,10 @@ font-size: x-large;
     z-index: -1;
     position: relative;
 }
+.AboutText{
+    text-align: center;
+    display: inline-block; 
+    vertical-align:top;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size:x-large;
+}
