@@ -12,12 +12,10 @@
        {{> navBar}}
     </div>
     
-    <div style="text-align: center;">
-        <img src="/img/shop_google.png" width= "50%"  height= "auto" alt="shop">
-    </div>
-    <div class = "FlavorText">
-    <p>Quality Cuts from a Local shop.</p>
-    <div id = "slideshow" style=" width: 600px; height: 400px; ">
+   
+    <div class = "FlavorText" style="margin-top: 12%;">
+    <p style="text-align: center;">Quality Cuts</p>
+    <div id = "cutsslideshow" style=" width: 600px; height: 400px; ">
             <div>
                 <img src="/img/1.jfif" height="100%" width="100%">
                 </div>
@@ -36,10 +34,29 @@
             
             </div>
         </div>
-        <div class = "FlavorText">
-            <p>Insert slideshow about nailwork</p>
+
+        <div class = "FlavorText" style="margin-top: 2%;">
+            <p style="text-align: center;">Quality Products</p>
+             <div id = "productslideshow" style=" width: 600px; height: 400px; ">
+            <div>
+                <img src="/img/Nail1.png" height="100%" width="100%">
+                </div>
+            <div>
+                <img src="/img/Nail3.png"  height="100%" width="100%">
+            </div>
+            <div>
+                <img src="/img/tatto.png"  height="100%" width="100%" >
+            </div>
+            
+            </div>
         </div>
-        <p>Quality cuts, Quality Makeup, Quality Studios</p>
+        <div class="FlavorText" style="margin-top: 2%;">
+            <p>Quality Studios</p>
+             <div style="text-align: center;">
+            <img src="/img/shop_google.png" width= "50%"  height= "auto" alt="shop">
+    </div>
+        </div>
+        
     <!--To DO: Add a "Book an appointment with one of our staff" button, and see if we can add portfolio onto the main page-->
     <p class="FlavorText" style="text-align: center;">Book an appointment with one of our staff now.</p>
     <a href="/staff" style="text-align: center;"><p class="FlavorText">Book now</p></a>
@@ -69,18 +86,40 @@
        })
        window.addEventListener('load',function(){
             resizeNavBar();
-            $("#slideshow > div:gt(0)").hide();
+            activate_cutsslides();
+            activate_productslides();
+            
+
+       })
+       function activate_cutsslides(){
+          
+           $("#cutsslideshow > div:gt(0)").hide();
 
             setInterval(function() { 
-            $('#slideshow > div:first')
+            $('#cutsslideshow > div:first')
             .fadeOut(1000)
             .next()
             .fadeIn(1000)
             .end()
-            .appendTo('#slideshow');
+            .appendTo('#cutsslideshow');
             }, 3000);
 
-       })
+       }
+       function activate_productslides(){
+           $("#productslideshow > div:gt(0)").hide();
+
+            setInterval(function() { 
+            $('#productslideshow > div:first')
+            .fadeOut(1000)
+            .next()
+            .fadeIn(1000)
+            .end()
+            .appendTo('#productslideshow');
+            }, 3000);
+
+       }
+       
+
         function resizeNavBar(){
              if(window.pageYOffset>610){
                bar.style.position = "fixed"
