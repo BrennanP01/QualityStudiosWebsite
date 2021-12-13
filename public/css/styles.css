@@ -133,9 +133,26 @@ font-size: x-large;
     text-align: center;
     vertical-align: top;
 }
+.FlavorText:link{
+    color:red;
+    text-decoration: none;
+}
+.FlavorText:visited{
+    color: red;
+    text-decoration: none;
+}
 .img{
     width: 30px;
     height: 30px;
+}
+.SocialMedia{
+    font-size: x-large;
+}
+.SocialMedia:Link{
+    color: blue;
+}
+.SocialMedia:visited{
+    color: blue;
 }
 .AboutImages{
     background-color:rgb(136,0,0,0.5);
