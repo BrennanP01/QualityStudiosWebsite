@@ -259,7 +259,7 @@ app.get('/map',(req,res)=>{
  })
 
   // Forces the user to log in to schedule an appointment
-  app.get('/schedule', async (req,res)=>{
+app.get('/schedule', async (req,res)=>{
    const staff = await Staff.find({}).lean()
    res.render('schedule', {
       style: '/css/schedule.css',
@@ -289,28 +289,37 @@ app.get('/register', checkNotAuthenticated,(req,res)=>{
    })
 })
 
-app.post('/register', checkNotAuthenticated, (req,res)=>{
+app.post('/register', checkNotAuthenticated, async (req,res)=>{
    try{
-      // add user to the database
-      const salt = bcrypt.genSaltSync(10)
-      const hashedPassword = bcrypt.hashSync(String(req.body.password), salt)
-      var fName = String(req.body.firstName)
-      var lName = String(req.body.lastName)
-      var emai = String(req.body.email)
-      mailer(emai)
-      const userEntry = new User({
-         firstName: fName,
-         lastName: lName,
-         email: emai,
-         password: hashedPassword
-      })
-      userEntry.save()
-         .then((result)=>{
+      var email = String(req.body.email)
+      User.findOne({email: email}).then(user => {
+         if(!user){
+             // add user to the database
+            const salt = bcrypt.genSaltSync(10)
+            const hashedPassword = bcrypt.hashSync(String(req.body.password), salt)
+            var fName = String(req.body.firstName)
+            var lName = String(req.body.lastName)
+            mailer(email)
+            const userEntry = new User({
+               firstName: fName,
+               lastName: lName,
+               email: email,
+               password: hashedPassword
+            })
+            console.log("saving")
+            userEntry.save()
+               .then((result)=>{
+                  res.redirect('/login')
+               })
+               .catch((err)=>{
+                  console.log(err)
+               })
+         }
+         else{
+            console.log("User already Exists")
             res.redirect('/login')
-         })
-         .catch((err)=>{
-            console.log(err)
-         })
+         }
+      })
    }catch(e){
       console.log(e)
       res.redirect('/register')
