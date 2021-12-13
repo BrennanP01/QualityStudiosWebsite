@@ -77,7 +77,6 @@
         var header = document.getElementsByClassName("navLink")
         const bar = document.getElementById('navBar')
        
-        //TODO: add another even listener "On load" That will properly display the tab depending on screen orientation
         window.addEventListener('scroll',function(){
            resizeHeaderImage();
             // Makes it so when you scroll past a certain point, the nav bar will stay in the same place and will not grow
@@ -85,18 +84,21 @@
            
        })
        window.addEventListener('load',function(){
+            getNavBarSize();
             resizeNavBar();
             activate_cutsslides();
             activate_productslides();
             
 
        })
+       //"Quality Cuts" slideshow
        function activate_cutsslides(){
-          
+           //When transitioning, it hides the current image
            $("#cutsslideshow > div:gt(0)").hide();
 
             setInterval(function() { 
             $('#cutsslideshow > div:first')
+            // Interval of fade-in/fade-out
             .fadeOut(1000)
             .next()
             .fadeIn(1000)
@@ -105,10 +107,12 @@
             }, 3000);
 
        }
+       //"Quality Products" slideshow
        function activate_productslides(){
            $("#productslideshow > div:gt(0)").hide();
 
             setInterval(function() { 
+           //Interval of fade-in/fade-out 
             $('#productslideshow > div:first')
             .fadeOut(1000)
             .next()
@@ -138,6 +142,17 @@
                 }
         
            } 
+        }
+        //Loads the correct NavBar size if the user loads the homepage below the cutoff line
+        function getNavBarSize(){
+            for(i =0; i<header.length; i++){
+                    navBarSize= 25+610/20+'px'
+                    header[i].style.fontSize = navBarSize;
+                    bar.style.left= "0%"
+                    bar.style.position = "relative"
+                }
+        
+
         }
         function resizeHeaderImage(){
             bg.style.backgroundSize = 100- +window.pageYOffset/12+ '%' //Shrinks the barbershop logo as you scroll down
