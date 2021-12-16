@@ -3,12 +3,6 @@
     <h3>Staff</h3>
 </header>
 {{> navBar}}
-{{! Objectives:
-1. Make schedule. Include today's date and show times for a 7 day period
-2. Make about us page
-3. Make appointment (new functionally)
-4. Make the server-side function
-    }}
  <form onsubmit="return updateResults()">
       <input type="text" placeholder="Search.." id="search">
       <button type="submit">Submit</button>
@@ -25,11 +19,11 @@
             </staff-photo>
             <staff-des>
                 <h2>{{this.name}}</h2>
-                <h4>{{this.specialty}}</h4>
+                <h4>{{this.speciality}}</h4>
                 <hr style="height: 5px; width: 30px; margin-left: 0; background-color: darkgray">
                 {{#if this.booksy}}
-                    <i class="fa fa-at"></i>
-                    <a href="{{this.link}}" target="_blank" rel="noopener noreferrer">{{this.booksy}}</a>
+                    <img src="/img/booksy_logo.png" style="width: 20px; height: 20px; float: left; position: relative; top: 10px;"> </p>
+                    <a href=" {{this.link}}" target="_blank" rel="noopener noreferrer">{{this.booksy}}</a>
                     <br>
                 {{else if this.site}}
                     <i class="fa fa-at"></i>

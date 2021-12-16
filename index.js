@@ -250,6 +250,7 @@ app.get('/map',(req,res)=>{
 
  app.get('/staff', async (req,res)=>{
    const staff = await Staff.find({}).lean()
+   console.log(staff)
    res.render('staff', {
       style: '/css/staff.css',
       script:'/scripts/staff.js',
