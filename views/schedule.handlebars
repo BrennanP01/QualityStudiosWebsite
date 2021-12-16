@@ -8,7 +8,22 @@
 {{else}}
     <p>Show schedule without option to register</p>
 {{/if}}
+<form class="key">
+    <label class="checkbox">Barber
+        <input type="checkbox" checked="checked" id="barber">
+        <span class="Barber checkmark"></span>
+    </label>
+    <label class="checkbox">Lash Technician
+        <input type="checkbox" checked="checked" id="lash technician">
+        <span class="Lash Technician checkmark"></span>
+    </label>
+    <label class="checkbox">Other
+        <input type="checkbox" checked="checked" id="other">
+        <span class="other checkmark"></span>
+    </label>
+</form>
 {{#with staff}}
     {{{makeTable}}}
 {{/with}}
+
 {{> footer}}

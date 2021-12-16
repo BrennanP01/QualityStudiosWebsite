@@ -205,64 +205,48 @@ const mailer = (recipient, content) => {
 var hbs = expressHandlebars.create({});
 
 hbs.handlebars.registerHelper("makeTable", function(staff) {
-   //Declare variables
-   let week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-   let week_abr = ['M', 'T', 'W', 'T', 'F', 'SA', 'SU']
-   let start = {hour: 9, mins: '00', period: 'AM'}
-   let end = {hour: 8, mins: '30', period: 'PM'}
-   let step = {...start};
-   let dom = ''
-   //Make times
-   times = []
-   while (step.hour != end.hour || step.mins != end.mins || step.period != end.period) {
-      times.push(step.hour + ':' + step.mins + ' ' + step.period)
-      if (step.mins == '00') {
-         step.mins = '30'
-      } else if (step.mins = '30') {
-         step.hour++
-         step.mins = '00'
-         if (step.hour == 12) {
-            step.period = 'PM'
+   dom = ''
+   dom += '<table style="width: 100%" class="schedule">'
+   dom += `
+   <tr>
+      <th>Staff</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
+      <th>Sunday</th>
+   </tr>`
+   Object.values(this).forEach(person => {
+      let img, role
+      if (person.hours) {
+         if (!person.photo) {
+            img = 'default.png'
+         } else {
+            img = person.photo
          }
-         if (step.hour == 13) {
-            step.hour = 1
+         switch (person.speciality) {
+            case 'Barber':
+            case 'Lash Technician':
+               role = person.speciality
+               break
+            default:
+               role = 'other'
          }
-      }
-   }
-   //console.log(times)
-   //Make table
-   week.forEach((day, i) => {
-      dom += '<table style="width: 100%">'
-      dom += '<tr>'
-      dom += '<th style="background-color: gold; color: white">' + day + '</th>'
-      times.forEach((hour, j) => {
-         if (j % 2 == 0) {
-            dom += '<th colspan="2" style="background-color: silver">' + hour + '</th>'
-         }
-       })
-       dom += '</tr>'
-       Object.values(this).forEach(person => {
-         if (person.hours) {
-            dom += '<tr>'
-            dom += '<td style="background-color: silver">' + person.name + '</td>'
-            let cell_color = 'black'
-            times.forEach(hour => {
-               if (person.hours[week_abr[i]] && person.hours[week_abr[i]][0]) { //If person has week day and if person day doesn't equal N/A (Might make a fileWriter next sprint)
-                  if (hour == person.hours[week_abr[i]][0]) {
-                  cell_color = 'white'
-                  } else if (hour == person.hours[week_abr[i]][1]) {
-                  cell_color = 'black'
-                  }
-               }      
-               dom += '<td style="background-color: ' + cell_color + '"></td>'
-            })
-         }     
+         dom += '<tr>'
+         dom += '<td class="' + role + '">' + '<img class= profile src="/img/' + img + '">&nbsp' + person.name + '</td>'
+         Object.values(person.hours).forEach(day =>  {
+            if (day.length > 1) {
+               dom += '<td>' + day[0] + '-' + day[1] + '</td>'
+            }
+         })
          dom += '</tr>'
-       })
-       dom += '</table>'
+      }
    })
+   dom += '</table>'
    return dom
-});
+})
 
 hbs.handlebars.registerHelper("makeStars", function(review) {
    stars = this.score

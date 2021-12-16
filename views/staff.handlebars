@@ -3,10 +3,10 @@
     <h3>Staff</h3>
 </header>
 {{> navBar}}
- <form onsubmit="return updateResults()">
+<form onsubmit="return updateResults()">
       <input type="text" placeholder="Search.." id="search">
       <button type="submit">Submit</button>
-    </form>
+</form>
 <staff-page id="staffpage">
     {{#each staff}}
         <staff-box id="{{this.name}}">
