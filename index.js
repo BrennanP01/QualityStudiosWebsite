@@ -14,7 +14,8 @@ const expressHandlebars = require('express-handlebars')
 const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
 const LocalStrategy = require('passport-local').Strategy
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer')
+const fs = require('fs')
 
 // mongodb library
 const mongoose = require('mongoose')
@@ -162,6 +163,15 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 
+//File reader (for email)
+function readFile() {
+   return new Promise((resolve, reject) => {
+      fs.readFile('public/email/email.html', 'utf8', function(err, data) {
+         //console.log(data)
+         resolve(data)
+      })
+   })
+}
 //Email
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -171,12 +181,17 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-const mailer = (recipient) => {
+const mailer = (recipient, content) => {
    transporter.sendMail({
       from: 'qualitystudiosbarbershop@gmail.com',
       to: recipient,
       subject: 'Welcome to Quality Studios!',
-      text: 'Thank you for registering to Quailty Studios.'
+      attachments: [{
+         filename: '/public/img/About-imageL.png',
+         path: __dirname +'/public/img/About-imageL.png',
+         cid: 'attachment' 
+      }],
+      html: content
       }
       , function(error, info){
       if (error) {
@@ -374,6 +389,7 @@ app.get('/register', checkNotAuthenticated,(req,res)=>{
 app.post('/register', checkNotAuthenticated, async (req,res)=>{
    try{
       var email = String(req.body.email)
+      let content = await readFile()
       User.findOne({email: email}).then(user => {
          if(!user){
              // add user to the database
@@ -381,7 +397,7 @@ app.post('/register', checkNotAuthenticated, async (req,res)=>{
             const hashedPassword = bcrypt.hashSync(String(req.body.password), salt)
             var fName = String(req.body.firstName)
             var lName = String(req.body.lastName)
-            mailer(email)
+            mailer(email, content)
             const userEntry = new User({
                firstName: fName,
                lastName: lName,
