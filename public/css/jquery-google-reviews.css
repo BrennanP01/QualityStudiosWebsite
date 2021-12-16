@@ -104,7 +104,7 @@
 }
 
 .review-stars ul li i {
-  color: blue;
+  color: red;
   /* Google's Star Orange in Nov 2017 */
   font-size: 1.4em;
   font-style: normal;

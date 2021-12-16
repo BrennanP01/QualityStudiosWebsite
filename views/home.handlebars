@@ -9,25 +9,13 @@
         </div>
     </header>
     <div style="text-align: center" id= "navBar">
-        <ul class="navigationBar" >
-            <a class="navLink" href="/"><li style="float:left" class="navigationElement">Home</li></a>
-            <a class="navLink" href="/map"><li style="float:left" class="navigationElement" >Map</li></a>
-            <a class="navLink" href="/social"><li style="float:left" class="navigationElement" >Socials</li></a>
-            <a class="navLink" href="/portfolio"><li style="float:left" class="navigationElement" >Portfolio</li></a>
-            <a class="navLink" href="/staff"><li style="float:left" class="navigationElement" >Staff</li></a>
-            <a class="navLink" href="/schedule"><li style="float:left" class="navigationElement">Schedule</li></a>
-            <a class="navLink" href="/about"><li style="float:left" class="navigationElement">About</li></a>
-            <a class="navLink" href="/reviews"><li style="float:left" class="navigationElement">Reviews</li></a>
-        </ul>
-        <br>
+       {{> navBar}}
     </div>
     
-    <div style="text-align: center;">
-        <img src="/img/shop_google.png" width= "50%"  height= "auto" alt="shop">
-    </div>
-    <div class = "FlavorText">
-    <p>Quality Cuts from a Local shop.</p>
-    <div id = "slideshow" style=" width: 600px; height: 400px; ">
+   
+    <div class = "FlavorText" style="margin-top: 12%;">
+    <p style="text-align: center;">Quality Cuts</p>
+    <div id = "cutsslideshow" style=" width: 600px; height: 400px; ">
             <div>
                 <img src="/img/1.jfif" height="100%" width="100%">
                 </div>
@@ -46,28 +34,40 @@
             
             </div>
         </div>
+
+        <div class = "FlavorText" style="margin-top: 2%;">
+            <p style="text-align: center;">Quality Products</p>
+             <div id = "productslideshow" style=" width: 600px; height: 400px; ">
+            <div>
+                <img src="/img/Nail1.png" height="100%" width="100%">
+                </div>
+            <div>
+                <img src="/img/Nail3.png"  height="100%" width="100%">
+            </div>
+            <div>
+                <img src="/img/tatto.png"  height="100%" width="100%" >
+            </div>
+            
+            </div>
+        </div>
+        <div class="FlavorText" style="margin-top: 2%;">
+            <p>Quality Studios</p>
+             <div style="text-align: center;">
+            <img src="/img/shop_google.png" width= "50%"  height= "auto" alt="shop">
+    </div>
+        </div>
+        
     <!--To DO: Add a "Book an appointment with one of our staff" button, and see if we can add portfolio onto the main page-->
     <p class="FlavorText" style="text-align: center;">Book an appointment with one of our staff now.</p>
-    <a href="/staff" style="text-align: center;"><p class="FlavorText">Book now</p></a>
+    <a href="/staff" class="FlavorText" style="text-align: center;"><p>Book now</p></a>
 
-    <div class = "Footer" style=  "text-align:center" id="Footer">
-          <p class="FooterText"> 822 Plainfield Rd,<br> Joliet, IL 60435</p>
-          <p class="FooterText">Contact Us: <a href = "tel:8155798940" style="font-size: x-large;">(815) 579 8940</a></p>
-          <p class = "FooterText"> Follow us<br> <a href = "https://www.instagram.com/quality.studios/?hl=en" style="font-size: x-large;">Instagram</a> 
-          <img src="/img/insta-logo.png" class="img"><br>
-          <a href = "https://www.facebook.com/quality.studioss/" style="font-size: x-large;">Facebook</a>
-           <img src="/img/facebook-logo.png" class="img"> </p>
-          <a href = "https://www.google.com/maps/dir//Quality+Studios,+822+Plainfield+Rd,+Joliet,+IL+60435/@41.5388837,-88.13847,13z/data=!4m9!4m8!1m0!1m5!1m1!1s0x880e61ce2c9c9161:0x1e651a799cdded3b!2m2!1d-88.1033459!2d41.5389638!3e0?hl=en" style="font-size: x-large;"> Get Directions<br></a>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2986.402158072174!2d-88.1056392842565!3d41.53888897925043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e61ce2c9c9161%3A0x1e651a799cdded3b!2sQuality%20Studios!5e0!3m2!1sen!2sus!4v1636306578057!5m2!1sen!2sus" 
-    width="500" height="300" style="border:0;" allowfullscreen="true"  loading="lazy"></iframe>
-    </div>
+    {{> footer}}
+    
    <script>
         const bg = document.getElementById('header');
         var header = document.getElementsByClassName("navLink")
         const bar = document.getElementById('navBar')
-        var navBarSize = 15+window.pageYOffset/20+'px'
        
-        //TODO: add another even listener "On load" That will properly display the tab depending on screen orientation
         window.addEventListener('scroll',function(){
            resizeHeaderImage();
             // Makes it so when you scroll past a certain point, the nav bar will stay in the same place and will not grow
@@ -75,36 +75,75 @@
            
        })
        window.addEventListener('load',function(){
-            $("#slideshow > div:gt(0)").hide();
+            getNavBarSize();
+            resizeNavBar();
+            activate_cutsslides();
+            activate_productslides();
+            
+
+       })
+       //"Quality Cuts" slideshow
+       function activate_cutsslides(){
+           //When transitioning, it hides the current image
+           $("#cutsslideshow > div:gt(0)").hide();
 
             setInterval(function() { 
-            $('#slideshow > div:first')
+            $('#cutsslideshow > div:first')
+            // Interval of fade-in/fade-out
             .fadeOut(1000)
             .next()
             .fadeIn(1000)
             .end()
-            .appendTo('#slideshow');
+            .appendTo('#cutsslideshow');
             }, 3000);
 
-       })
+       }
+       //"Quality Products" slideshow
+       function activate_productslides(){
+           $("#productslideshow > div:gt(0)").hide();
+
+            setInterval(function() { 
+           //Interval of fade-in/fade-out 
+            $('#productslideshow > div:first')
+            .fadeOut(1000)
+            .next()
+            .fadeIn(1000)
+            .end()
+            .appendTo('#productslideshow');
+            }, 3000);
+
+       }
+       
+
         function resizeNavBar(){
              if(window.pageYOffset>610){
                bar.style.position = "fixed"
                bar.style.top = "0%";
-               bar.style.left = "5.5%";
-               bar.style.textAlign = "center"
+               bar.style.left = "0%";
+               //bar.style.textAlign = "center"
             }
             else{
                 //Once you scroll up past a certain point, the bar will begin to grow / shrink again.
                 for(i =0; i<header.length; i++){
                    
-                    navBarSize= 15+window.pageYOffset/20+'px';
+                    navBarSize= 25+window.pageYOffset/20+'px';
                     header[i].style.fontSize = navBarSize;
                     bar.style.left= "0%"
                     bar.style.position = "relative"
                 }
         
            } 
+        }
+        //Loads the correct NavBar size if the user loads the homepage below the cutoff line
+        function getNavBarSize(){
+            for(i =0; i<header.length; i++){
+                    navBarSize= 25+610/20+'px'
+                    header[i].style.fontSize = navBarSize;
+                    bar.style.left= "0%"
+                    bar.style.position = "relative"
+                }
+        
+
         }
         function resizeHeaderImage(){
             bg.style.backgroundSize = 100- +window.pageYOffset/12+ '%' //Shrinks the barbershop logo as you scroll down

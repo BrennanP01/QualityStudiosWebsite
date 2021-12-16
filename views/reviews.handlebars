@@ -1,5 +1,7 @@
 <head>
   <link rel="stylesheet" href="css\jquery-google-reviews.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
     <title>Quality Studios Reviews</title>
 
   <!-- JQUERY IS REQUIRED (NPM install JQuery)-->
@@ -225,9 +227,31 @@ Thank you guys!
         <h3>Reviews</h3>
     </header>
     {{> navBar}}
- <!-- the plugin needs an id to interact with, best with an empty div -->
-  <div id="google-reviews"></div>
+    <br />
+  {{!-- Our custom reveiws --}}
+  <div id="custom-reviews">
+   {{#each customReviews}}
+        <div id="{{this.firstName}} {{this.lastName}}" style="border-style: solid; border-color:black; border-width: thin; background-color:rgb(128, 128, 128,0.4);">
+              <h3 style="margin-left: 5px;">{{this.firstName}} {{this.lastName}}</h3>
+              <hr style="margin: 10px; height: 5px; width: 30%; margin-left: 5px; background-color: darkgray">
+              {{#with this}}
+                {{{makeStars}}}
+              {{/with}}
+              <p style="margin-left: 5px;">{{this.reviewText}}</p>
+        </div>
+    {{/each}}
+  </div>
+  {{#if user}}
+    <br />
+    <a class="navLink" href="/leaveReview"><li style="float:center" class="navigationElement">Leave a Review!</li></a>
+    <br />
+  {{/if}}
 
+  <h2>Customers on Google Love Us Too!</h2>
+ <!-- the plugin needs an id to interact with, best with an empty div -->
+  <div style="background-color:rgb(128, 128, 128,0.4);">
+  <div id="google-reviews"></div>
+   </div>
   <script>
     jQuery(document).ready(function($) {
       if ($("#google-reviews").length == 0) {
@@ -252,5 +276,5 @@ Thank you guys!
       });
     });
     </script>
-
+  {{> footer}}
 </body>
