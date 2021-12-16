@@ -42,6 +42,32 @@ const User = mongoose.model("User", new mongoose.Schema(
   }
 ))
 
+const Review = mongoose.model("Review", new mongoose.Schema(
+   {
+      firstName: {
+          type: String,
+          required: true
+      },
+      lastName: {
+          type: String,
+          required: true
+      },
+      userEmail: {
+          type: String,
+          required: true
+      },
+      score: {
+          type: Number,
+          required: true
+      },
+      reviewText: {
+         type:String,
+         required: true
+      }
+      
+  }
+))
+
 const Staff = mongoose.model("Staff", new mongoose.Schema(
    {
       name: {type: String, required:true},
@@ -223,6 +249,19 @@ hbs.handlebars.registerHelper("makeTable", function(staff) {
    return dom
 });
 
+hbs.handlebars.registerHelper("makeStars", function(review) {
+   stars = this.score
+   returnVal = ""
+   for(i = 0; i < 5; i++){
+      if(stars > 0){
+         returnVal += "<span class='fa fa-star' style='color:orange;'></span>"
+         stars -= 1
+      }else{
+         returnVal += "<span class='fa fa-star'></span>"
+      }
+   }
+   return returnVal
+})
 
 hbs.handlebars.registerHelper("ifEqual", function(a, b, options) {
    if(a==b){return options.fn(this)}
@@ -244,9 +283,50 @@ app.get('/map',(req,res)=>{
  app.get('/portfolio',(req,res)=>{
     res.render('portfolio', {user: req.user})
  })
- app.get('/reviews' ,(req,res)=>{
-    res.render('reviews', {user: req.user})
+
+ app.get('/reviews' , async (req,res)=>{
+    const reviews = await Review.find({}).lean()
+    res.render('reviews', {
+      user: req.user,
+      customReviews: reviews
+      })
  })
+
+app.get('/leaveReview', (req,res)=>{
+   res.render('leaveReview', {style: "/css/login.css", user: req.user})
+})
+
+app.post('/leaveReview', (req,res)=>{
+   try{
+      // add review to the database
+      console.log
+      var firstName = req.user.firstName
+      var lastName = req.user.lastName      
+      var email = req.user.email       
+      var reviewText = String(req.body.reviewText)      
+      var score = req.body.score
+
+      const reviewEntry = new Review({
+         firstName: firstName,
+         lastName: lastName,
+         userEmail: email,
+         score: score,
+         reviewText: reviewText
+      })
+
+      reviewEntry.save()
+         .then((result) => {
+            res.redirect('/reviews')
+         })
+         .catch((err) => {
+            console.log(err)
+         })
+
+   }catch(e){
+      console.log(e)
+      res.redirect('/leaveReview')
+   }
+})
 
  app.get('/staff', async (req,res)=>{
    const staff = await Staff.find({}).lean()
@@ -268,6 +348,7 @@ app.get('/schedule', async (req,res)=>{
       user: req.user
    })
    })
+
  app.get('/about',(req,res)=>{
     res.render('about', {user: req.user})
  })

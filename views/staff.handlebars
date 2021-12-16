@@ -50,7 +50,7 @@
         </staff-box>
     {{/each}}
 </staff-page>
- {{#ifEqual user.firstName "admin"}}
+ {{#ifEqual user.email "admin@admin"}}
     <a class="navigationButton" href="/staffRegister">Add Staff</a>
  {{/ifEqual}}
  {{> footer}}
