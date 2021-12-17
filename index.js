@@ -206,9 +206,9 @@ var hbs = expressHandlebars.create({});
 
 hbs.handlebars.registerHelper("makeTable", function(staff) {
    dom = ''
-   dom += '<table style="width: 100%" class="schedule">'
+   dom += '<table style="width: 100%" class="schedule" id="schedule">'
    dom += `
-   <tr>
+   <tr id="header">
       <th>Staff</th>
       <th>Monday</th>
       <th>Tuesday</th>
@@ -229,12 +229,12 @@ hbs.handlebars.registerHelper("makeTable", function(staff) {
          switch (person.speciality) {
             case 'Barber':
             case 'Lash Technician':
-               role = person.speciality
+               role = person.speciality.toLowerCase()
                break
             default:
                role = 'other'
          }
-         dom += '<tr>'
+         dom += '<tr id="' + person.name + '">'
          dom += '<td class="' + role + '">' + '<img class= profile src="/img/' + img + '">&nbsp' + person.name + '</td>'
          Object.values(person.hours).forEach(day =>  {
             if (day.length > 1) {

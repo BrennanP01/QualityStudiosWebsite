@@ -16,20 +16,20 @@ table, th, td {
     border: 1px solid rgb(230, 230, 230);
     background: rgb(238, 238, 238);
     border-collapse: collapse;
-    height: 20px
 }
 
 table {
-    margin-right: auto;    
+    position: relative;
+    display: inline-table; 
     min-width: var(--col-8);
     max-width: var(--col-8);
 }
 
-td {
+th, td {
     width: var(--col-1);
 }
 .key {
-    float: left;
+    display: inline-table; /*Only way for table and key to be side by side*/
     border: 2px solid rgb(230, 230, 230);
     margin-left: var(--col-1);
     margin-right: 10px;
@@ -38,6 +38,10 @@ td {
     max-width: var(--col-2);
     max-height: 250px;
     background: rgb(238, 238, 238); 
+    overflow-x: scroll;
+    padding-top: 35px;
+    padding-left: 35px;
+    vertical-align: top
 }
 .checkbox {
     display: block;
@@ -50,8 +54,6 @@ td {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    left: 17%;
-    top: 20px;
 }
 /* Hide the browser's default checkbox */
 .checkbox input {
@@ -101,10 +103,10 @@ td {
     float: left; 
     position: relative; 
 }
-.Barber {
+.barber {
     background-color:lightseagreen;
 }
-.Lash.Technician {
+.lash.technician {
     background-color: mediumorchid;
 }
 

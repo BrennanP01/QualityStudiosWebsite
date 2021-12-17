@@ -1,21 +1,24 @@
 function updateResults() {
     let searchItem = document.getElementById('search').value
     let children = document.getElementById('staffpage').children; //get container element children.
+    let e, name
     if (searchItem == ''){
         for (let i = 0, len = children.length ; i < len; i++) {
-            children[i].style.display = "inline-block"
-            children[i].style.visibility = 'visible'    
+            e = children[i]
+            e.style.display = "inline-block"
+            e.style.visibility = 'visible'    
         }
     }else{
         console.log(searchItem)
         for (let i = 0, len = children.length ; i < len; i++) {
-            let name = children[i].id
+            e = children[i]
+            name = e.id
             if (name.slice(0, searchItem.length).toLowerCase() == searchItem.toLowerCase()){
-                children[i].style.display = 'inline-block'
-                children[i].style.visibility = 'visible'  
+                e.style.display = 'inline-block'
+                e.style.visibility = 'visible'  
             }else {
-                children[i].style.display = 'none'
-                children[i].style.visibility = 'hidden'
+                e.style.display = 'none'
+                e.style.visibility = 'hidden'
             }
         }
     }
